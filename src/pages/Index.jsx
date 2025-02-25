@@ -30,10 +30,10 @@ const HeroSection = () => {
           ultimate challenge. Engage, outsmart, and claim your rewards.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
-          <button className="bg-purple-700 text-background px-8 py-3 rounded-lg hover:bg-purple-800 hover:shadow-[0_0_8px_#4c1d95] transition-all duration-200 flex items-center justify-center gap-2 hover:scale-105">
+          <button className="bg-[#4c1d95] text-background px-8 py-3 rounded-lg hover:bg-[#3b1578] hover:shadow-[0_0_8px_#4c1d95] transition-all duration-200 flex items-center justify-center gap-2 hover:scale-105">
             Start Playing <ArrowRight size={20} />
           </button>
-          <button className="bg-transparent text-purple-700 px-8 py-3 rounded-lg border border-purple-700 hover:bg-purple-800 hover:shadow-[0_0_8px_#4c1d95] transition-all duration-200 hover:scale-105">
+          <button className="bg-transparent text-[#4c1d95] px-8 py-3 rounded-lg border border-[#4c1d95] hover:bg-[#3b1578] hover:shadow-[0_0_8px_#4c1d95] transition-all duration-200 hover:scale-105">
             Create Your AI Agent
           </button>
         </div>

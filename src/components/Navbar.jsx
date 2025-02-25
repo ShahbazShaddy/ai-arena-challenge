@@ -1,7 +1,112 @@
-
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+
+const NavContainer = styled.nav`
+  position: fixed;
+  width: 100%;
+  background: #1e1a39;
+  color: #e0e0e0;
+  z-index: 50;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+`;
+
+const NavContent = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+`;
+
+const Logo = styled.div`
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  
+  img {
+    height: 30px;
+  }
+`;
+
+const NavLinks = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+`;
+
+const NavButton = styled.button`
+  background: #6c5dd3;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: #5a4aba;
+  }
+`;
+
+const NavLink = styled.button`
+  color: #ccc;
+  transition: color 0.3s ease;
+  font-size: 1rem;
+  
+  &:hover {
+    color: #fff;
+  }
+`;
+
+const MobileMenuButton = styled.button`
+  color: #ccc;
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: #fff;
+  }
+`;
+
+const MobileMenu = styled.div`
+  padding: 1rem 2rem;
+  background: #1e1a39;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+`;
+
+const MobileMenuItem = styled.button`
+  display: block;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  color: #ccc;
+  transition: all 0.3s ease;
+  text-align: left;
+  width: 100%;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+  }
+`;
+
+const MobileMenuConnectButton = styled.button`
+  width: 100%;
+  background: #6c5dd3;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  transition: background 0.3s ease;
+  
+  &:hover {
+    background: #5a4aba;
+  }
+`;
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,64 +119,44 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <div className="flex-shrink-0 flex items-center">
-              <span className="text-2xl font-bold text-primary">Singularity Arena</span>
-            </div>
-          </div>
-          
-          <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => navigate(item.href)}
-                className="text-gray-700 hover:text-primary transition-colors duration-200"
-              >
-                {item.name}
-              </button>
-            ))}
-            <button className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors duration-200">
-              Connect Wallet
-            </button>
-          </div>
+    <NavContainer>
+      <NavContent>
+        <Logo>
+          <img src="logo.svg" alt="Logo" />
+          AI Arena
+        </Logo>
+        
+        <NavLinks className="hidden md:flex">
+          {navigation.map((item) => (
+            <NavLink key={item.name} onClick={() => navigate(item.href)}>
+              {item.name}
+            </NavLink>
+          ))}
+          <NavButton onClick={() => navigate('/connect-wallet')}>Connect Wallet</NavButton>
+        </NavLinks>
 
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-primary"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-        </div>
-      </div>
+        <MobileMenuButton className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </MobileMenuButton>
+      </NavContent>
 
-      {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-b border-gray-200">
-            {navigation.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => {
-                  navigate(item.href);
-                  setIsOpen(false);
-                }}
-                className="block px-3 py-2 rounded-md text-gray-700 hover:text-primary w-full text-left"
-              >
-                {item.name}
-              </button>
-            ))}
-            <button className="w-full bg-primary text-white px-3 py-2 rounded-md">
-              Connect Wallet
-            </button>
-          </div>
-        </div>
+        <MobileMenu>
+          {navigation.map((item) => (
+            <MobileMenuItem
+              key={item.name}
+              onClick={() => {
+                navigate(item.href);
+                setIsOpen(false);
+              }}
+            >
+              {item.name}
+            </MobileMenuItem>
+          ))}
+          <MobileMenuConnectButton onClick={() => navigate('/connect-wallet')}>Connect Wallet</MobileMenuConnectButton>
+        </MobileMenu>
       )}
-    </nav>
+    </NavContainer>
   );
 };
 
