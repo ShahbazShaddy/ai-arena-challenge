@@ -1,6 +1,6 @@
 
 import Navbar from '../components/Navbar';
-import { ArrowRight, Trophy, Wallet, Robot } from 'lucide-react';
+import { ArrowRight, Trophy, Wallet } from 'lucide-react';
 
 const HeroSection = () => (
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-accent to-white">
@@ -47,7 +47,7 @@ const Index = () => {
       description: "Pay a participation fee and enter the game with rewards at stake.",
     },
     {
-      icon: Robot,
+      icon: Trophy,
       title: "Compete & Win",
       description: "Face autonomous AI agents and earn rewards for your victories.",
     },
